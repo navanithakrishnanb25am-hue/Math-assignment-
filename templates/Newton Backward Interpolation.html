@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Newton Backward Interpolation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Newton Backward Interpolation Calculator</h1>
+
+<p>Enter the last two values of the table</p>
+
+x₀ <input id="x0">
+y₀ <input id="y0"><br><br>
+
+x₁ <input id="x1">
+y₁ <input id="y1"><br><br>
+
+Value of x to estimate
+<input id="x"><br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+function calculate(){
+
+let x0=parseFloat(document.getElementById("x0").value);
+let y0=parseFloat(document.getElementById("y0").value);
+let x1=parseFloat(document.getElementById("x1").value);
+let y1=parseFloat(document.getElementById("y1").value);
+let x=parseFloat(document.getElementById("x").value);
+
+let h = x1-x0;
+
+let p=(x-x1)/h;
+
+let dy = y1-y0;
+
+let result = y1 + p*dy;
+
+document.getElementById("result").innerHTML="Estimated value = "+result;
+
+}
+
+</script>
+
+</body>
+</html>

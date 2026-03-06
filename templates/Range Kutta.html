@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Runge Kutta Method</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Runge Kutta Method Calculator</h1>
+
+Enter dy/dx = x + y (example function)
+
+<br><br>
+
+x₀ <input id="x0"><br><br>
+y₀ <input id="y0"><br><br>
+Step size (h) <input id="h"><br><br>
+
+<button onclick="rk()">Calculate</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+function f(x,y){
+return x+y;
+}
+
+function rk(){
+
+let x=parseFloat(document.getElementById("x0").value);
+let y=parseFloat(document.getElementById("y0").value);
+let h=parseFloat(document.getElementById("h").value);
+
+let k1=h*f(x,y);
+let k2=h*f(x+h/2,y+k1/2);
+let k3=h*f(x+h/2,y+k2/2);
+let k4=h*f(x+h,y+k3);
+
+let ynext=y+(k1+2*k2+2*k3+k4)/6;
+
+document.getElementById("result").innerHTML="Next value of y = "+ynext;
+
+}
+
+</script>
+
+</body>
+</html>
