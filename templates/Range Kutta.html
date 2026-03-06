@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Runge Kutta Method</title>
+<title>Runge Kutta RK4</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Runge Kutta Method Calculator</h1>
+<h1>Runge-Kutta Method (RK4)</h1>
 
-Enter dy/dx = x + y (example function)
+dy/dx = <input id="func" placeholder="x+y"><br><br>
 
-<br><br>
+x0 <input id="x0"><br><br>
+y0 <input id="y0"><br><br>
+h <input id="h"><br><br>
 
-x₀ <input id="x0"><br><br>
-y₀ <input id="y0"><br><br>
-Step size (h) <input id="h"><br><br>
+<button onclick="calculate()">Solve</button>
 
-<button onclick="rk()">Calculate</button>
-
-<h3 id="result"></h3>
+<h2 id="result"></h2>
 
 <script>
 
 function f(x,y){
-return x+y;
+
+let expr=document.getElementById("func").value;
+
+return eval(expr);
+
 }
 
-function rk(){
+function calculate(){
 
 let x=parseFloat(document.getElementById("x0").value);
 let y=parseFloat(document.getElementById("y0").value);
@@ -40,7 +42,8 @@ let k4=h*f(x+h,y+k3);
 
 let ynext=y+(k1+2*k2+2*k3+k4)/6;
 
-document.getElementById("result").innerHTML="Next value of y = "+ynext;
+document.getElementById("result").innerHTML=
+"Next y value = "+ynext;
 
 }
 
