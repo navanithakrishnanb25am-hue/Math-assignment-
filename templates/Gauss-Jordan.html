@@ -1,61 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Gauss Jordan Calculator</title>
-<link rel="stylesheet" href="static/Gauss-Jordan.css">
+<title>Gauss Jordan Solver</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Gauss Jordan Method Calculator</h1>
+<h1>Gauss-Jordan Equation Solver</h1>
 
-<p>Enter the augmented matrix:</p>
+<p>Enter equations:</p>
 
-<table>
-<tr>
-<td><input id="a11"></td>
-<td><input id="a12"></td>
-<td><input id="a13"></td>
-<td><input id="b1"></td>
-</tr>
-
-<tr>
-<td><input id="a21"></td>
-<td><input id="a22"></td>
-<td><input id="a23"></td>
-<td><input id="b2"></td>
-</tr>
-
-<tr>
-<td><input id="a31"></td>
-<td><input id="a32"></td>
-<td><input id="a33"></td>
-<td><input id="b3"></td>
-</tr>
-</table>
+<input id="eq1" placeholder="x + y + z = 9"><br>
+<input id="eq2" placeholder="2x - 3y + 4z = 13"><br>
+<input id="eq3" placeholder="3x + 4y + 5z = 40"><br><br>
 
 <button onclick="solve()">Solve</button>
 
-<h3 id="result"></h3>
+<h2 id="result"></h2>
 
 <script>
 
+function parse(eq){
+
+eq = eq.replace(/\s+/g,'');
+
+let parts = eq.split('=');
+
+let left = parts[0];
+let right = parseFloat(parts[1]);
+
+let x = parseFloat((left.match(/[-+]?\d*\.?\d*x/)||["0"])[0].replace('x','')) || 1;
+let y = parseFloat((left.match(/[-+]?\d*\.?\d*y/)||["0"])[0].replace('y','')) || 1;
+let z = parseFloat((left.match(/[-+]?\d*\.?\d*z/)||["0"])[0].replace('z','')) || 1;
+
+return [x,y,z,right];
+
+}
+
 function solve(){
 
-let a11=parseFloat(document.getElementById("a11").value);
-let a12=parseFloat(document.getElementById("a12").value);
-let a13=parseFloat(document.getElementById("a13").value);
-let b1=parseFloat(document.getElementById("b1").value);
+let e1=parse(document.getElementById("eq1").value);
+let e2=parse(document.getElementById("eq2").value);
+let e3=parse(document.getElementById("eq3").value);
 
-let a21=parseFloat(document.getElementById("a21").value);
-let a22=parseFloat(document.getElementById("a22").value);
-let a23=parseFloat(document.getElementById("a23").value);
-let b2=parseFloat(document.getElementById("b2").value);
-
-let a31=parseFloat(document.getElementById("a31").value);
-let a32=parseFloat(document.getElementById("a32").value);
-let a33=parseFloat(document.getElementById("a33").value);
-let b3=parseFloat(document.getElementById("b3").value);
+let a11=e1[0],a12=e1[1],a13=e1[2],b1=e1[3];
+let a21=e2[0],a22=e2[1],a23=e2[2],b2=e2[3];
+let a31=e3[0],a32=e3[1],a33=e3[2],b3=e3[3];
 
 let D = a11*(a22*a33-a23*a32)
        -a12*(a21*a33-a23*a31)
@@ -73,11 +64,11 @@ let Dz = a11*(a22*b3-b2*a32)
        -a12*(a21*b3-b2*a31)
        +b1*(a21*a32-a22*a31);
 
-let x = Dx/D;
-let y = Dy/D;
-let z = Dz/D;
+let x=Dx/D;
+let y=Dy/D;
+let z=Dz/D;
 
-document.getElementById("result").innerHTML =
+document.getElementById("result").innerHTML=
 "x = "+x+"<br>y = "+y+"<br>z = "+z;
 
 }
