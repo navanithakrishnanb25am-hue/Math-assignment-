@@ -1,79 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Gauss Jordan Solver</title>
+<title>Gauss Jordan Calculator</title>
 <link rel="stylesheet" href="/static/Gauss-Jordan.css">
 </head>
 
 <body>
 
-<h1>Gauss-Jordan Equation Solver</h1>
+<h1>Gauss Jordan Method Solver</h1>
 
-<p>Enter equations:</p>
+Number of Equations :
+<input type="number" id="n">
+<button onclick="createMatrix()">Create Matrix</button>
 
-<input id="eq1" placeholder="x + y + z = 9"><br>
-<input id="eq2" placeholder="2x - 3y + 4z = 13"><br>
-<input id="eq3" placeholder="3x + 4y + 5z = 40"><br><br>
+<br><br>
+
+<div id="matrixArea"></div>
+
+<br>
 
 <button onclick="solve()">Solve</button>
 
-<h2 id="result"></h2>
+<h2>Result</h2>
+<div id="result"></div>
 
 <script>
 
-function parse(eq){
+function createMatrix(){
 
-eq = eq.replace(/\s+/g,'');
+let n=document.getElementById("n").value
 
-let parts = eq.split('=');
+let table="<table border='1'>"
 
-let left = parts[0];
-let right = parseFloat(parts[1]);
+for(let i=0;i<n;i++){
 
-let x = parseFloat((left.match(/[-+]?\d*\.?\d*x/)||["0"])[0].replace('x','')) || 1;
-let y = parseFloat((left.match(/[-+]?\d*\.?\d*y/)||["0"])[0].replace('y','')) || 1;
-let z = parseFloat((left.match(/[-+]?\d*\.?\d*z/)||["0"])[0].replace('z','')) || 1;
+table+="<tr>"
 
-return [x,y,z,right];
+for(let j=0;j<=n;j++){
+
+table+=`<td><input id="a${i}${j}" style="width:60px"></td>`
+
+}
+
+table+="</tr>"
+
+}
+
+table+="</table>"
+
+document.getElementById("matrixArea").innerHTML=table
 
 }
 
 function solve(){
 
-let e1=parse(document.getElementById("eq1").value);
-let e2=parse(document.getElementById("eq2").value);
-let e3=parse(document.getElementById("eq3").value);
+let n=document.getElementById("n").value
 
-let a11=e1[0],a12=e1[1],a13=e1[2],b1=e1[3];
-let a21=e2[0],a22=e2[1],a23=e2[2],b2=e2[3];
-let a31=e3[0],a32=e3[1],a33=e3[2],b3=e3[3];
+let a=[]
 
-let D = a11*(a22*a33-a23*a32)
-       -a12*(a21*a33-a23*a31)
-       +a13*(a21*a32-a22*a31);
+for(let i=0;i<n;i++){
 
-let Dx = b1*(a22*a33-a23*a32)
-       -a12*(b2*a33-a23*b3)
-       +a13*(b2*a32-a22*b3);
+a[i]=[]
 
-let Dy = a11*(b2*a33-a23*b3)
-       -b1*(a21*a33-a23*a31)
-       +a13*(a21*b3-b2*a31);
+for(let j=0;j<=n;j++){
 
-let Dz = a11*(a22*b3-b2*a32)
-       -a12*(a21*b3-b2*a31)
-       +b1*(a21*a32-a22*a31);
+a[i][j]=parseFloat(document.getElementById("a"+i+j).value)
 
-let x=Dx/D;
-let y=Dy/D;
-let z=Dz/D;
+}
 
-document.getElementById("result").innerHTML=
-"x = "+x+"<br>y = "+y+"<br>z = "+z;
+}
+
+for(let i=0;i<n;i++){
+
+let pivot=a[i][i]
+
+for(let j=0;j<=n;j++)
+a[i][j]=a[i][j]/pivot
+
+for(let k=0;k<n;k++){
+
+if(k!=i){
+
+let factor=a[k][i]
+
+for(let j=0;j<=n;j++){
+
+a[k][j]=a[k][j]-factor*a[i][j]
+
+}
+
+}
+
+}
+
+}
+
+let output=""
+
+for(let i=0;i<n;i++){
+
+output+="x"+(i+1)+" = "+a[i][n]+"<br>"
+
+}
+
+document.getElementById("result").innerHTML=output
 
 }
 
 </script>
 
 </body>
+
 </html>

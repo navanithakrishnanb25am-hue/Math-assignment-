@@ -9,40 +9,97 @@
 
 <h1>Newton Backward Interpolation Calculator</h1>
 
-<p>Enter the last two values of the table</p>
+Number of Data Points :
+<input type="number" id="points">
+<button onclick="createTable()">Create Table</button>
 
-x₀ <input id="x0">
-y₀ <input id="y0"><br><br>
+<br><br>
 
-x₁ <input id="x1">
-y₁ <input id="y1"><br><br>
+<div id="tableArea"></div>
 
-Value of x to estimate
-<input id="x"><br><br>
+<br>
 
-<button onclick="calculate()">Calculate</button>
+Value of x to find y :
+<input id="xvalue">
 
-<h3 id="result"></h3>
+<br><br>
+
+<button onclick="solve()">Solve</button>
+
+<h2>Result</h2>
+<div id="output"></div>
 
 <script>
 
-function calculate(){
+function createTable(){
 
-let x0=parseFloat(document.getElementById("x0").value);
-let y0=parseFloat(document.getElementById("y0").value);
-let x1=parseFloat(document.getElementById("x1").value);
-let y1=parseFloat(document.getElementById("y1").value);
-let x=parseFloat(document.getElementById("x").value);
+let n=document.getElementById("points").value
+let table="<table border='1'><tr><th>x</th><th>y</th></tr>"
 
-let h = x1-x0;
+for(let i=0;i<n;i++){
 
-let p=(x-x1)/h;
+table+=`<tr>
+<td><input id="x${i}"></td>
+<td><input id="y${i}"></td>
+</tr>`
 
-let dy = y1-y0;
+}
 
-let result = y1 + p*dy;
+table+="</table>"
 
-document.getElementById("result").innerHTML="Estimated value = "+result;
+document.getElementById("tableArea").innerHTML=table
+
+}
+
+function solve(){
+
+let n=document.getElementById("points").value
+
+let x=[]
+let y=[]
+
+for(let i=0;i<n;i++){
+
+x[i]=parseFloat(document.getElementById("x"+i).value)
+y[i]=parseFloat(document.getElementById("y"+i).value)
+
+}
+
+let value=parseFloat(document.getElementById("xvalue").value)
+
+let diff=[]
+for(let i=0;i<n;i++) diff[i]=[]
+
+for(let i=0;i<n;i++) diff[i][0]=y[i]
+
+for(let j=1;j<n;j++){
+
+for(let i=n-1;i>=j;i--){
+
+diff[i][j]=diff[i][j-1]-diff[i-1][j-1]
+
+}
+
+}
+
+let h=x[1]-x[0]
+let p=(value-x[n-1])/h
+
+let result=y[n-1]
+let pterm=1
+let fact=1
+
+for(let i=1;i<n;i++){
+
+pterm*= (p+i-1)
+fact*=i
+
+result+= (pterm*diff[n-1][i])/fact
+
+}
+
+document.getElementById("output").innerHTML=
+"Interpolated Value = "+result
 
 }
 
