@@ -10,7 +10,7 @@
 <h1>Runge Kutta 4th Order Method</h1>
 
 f(x,y) =
-<input id="func" placeholder="x+y"><br><br>
+<input id="func" placeholder="f(x,y)"><br><br>
 
 Initial x₀ :
 <input id="x0"><br><br>
@@ -55,16 +55,16 @@ let k4=h*f(x+h,y+k3)
 let dy=(k1+2*k2+2*k3+k4)/6
 
 text+=`<b>Step ${i+1}</b><br>`
-text+=`k1 = ${k1}<br>`
-text+=`k2 = ${k2}<br>`
-text+=`k3 = ${k3}<br>`
-text+=`k4 = ${k4}<br>`
-text+=`Δy = ${dy}<br>`
+text+=`k1 = ${k1.toFixed(5)}<br>`
+text+=`k2 = ${k2.toFixed(5)}<br>`
+text+=`k3 = ${k3.toFixed(5)}<br>`
+text+=`k4 = ${k4.toFixed(5)}<br>`
+text+=`Δy = ${dy.toFixed(5)}<br>`
 
 y=y+dy
 x=x+h
 
-text+=`y(${x}) = ${y}<br><br>`
+text+=`y(${x.toFixed(5)}) = ${y.toFixed(5)}<br><br>`
 
 }
 
@@ -76,3 +76,4 @@ document.getElementById("output").innerHTML=text
 
 </body>
 </html>
+
