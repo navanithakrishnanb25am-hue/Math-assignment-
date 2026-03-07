@@ -8,26 +8,33 @@
 
 <body>
 
+<div class="container">
+
 <h1>Numerical Methods Calculator</h1>
+<p class="subtitle">Engineering Mathematics Toolkit</p>
 
-<p>Select a Method</p>
+<div class="cards">
 
-<div class="menu">
+<div class="card" onclick="location.href='Gauss-Jordan.html'">
+<h2>Gauss Jordan Method</h2>
+<p>Solve simultaneous linear equations using the Gauss-Jordan elimination technique.</p>
+</div>
 
-<button onclick="location.href='/templates/Gauss-Jordan.html'">
-Gauss Jordan Method
-</button>
+<div class="card" onclick="location.href='Newton-Backward-Interpolation.html'">
+<h2>Newton Backward Interpolation</h2>
+<p>Estimate unknown values from a table using backward difference interpolation.</p>
+</div>
 
-<button onclick="location.href='/templates/Newton Backward Interpolation.html'">
-Newton Backward Interpolation
-</button>
+<div class="card" onclick="location.href='Range Kutta.html'">
+<h2>Runge Kutta Method</h2>
+<p>Solve first-order differential equations using the 4th order Runge-Kutta method.</p>
+</div>
 
-<button onclick="location.href='/templates/Range Kutta.html'">
-Runge Kutta Method
-</button>
+</div>
 
 </div>
 
 </body>
 
 </html>
+
