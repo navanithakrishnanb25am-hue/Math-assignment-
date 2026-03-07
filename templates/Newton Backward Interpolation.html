@@ -1,13 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>Newton Backward Interpolation</title>
-<link rel="stylesheet" href="/static/Newton Backward Interpolation.css">
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:linear-gradient(135deg,#1f4037,#99f2c8);
+margin:0;
+}
+
+h1{
+color:white;
+margin-top:40px;
+}
+
+.container{
+background:white;
+width:70%;
+margin:auto;
+padding:30px;
+margin-top:30px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+input{
+padding:8px;
+margin:6px;
+width:120px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#1f4037;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0f2027;
+}
+
+table{
+margin:auto;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+td,th{
+border:1px solid #ddd;
+padding:10px;
+}
+
+#output{
+margin-top:20px;
+font-size:18px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>Newton Backward Interpolation Calculator</h1>
+<h1>Newton Backward Interpolation</h1>
+
+<div class="container">
 
 Number of Data Points :
 <input type="number" id="points">
@@ -27,14 +94,18 @@ Value of x to find y :
 <button onclick="solve()">Solve</button>
 
 <h2>Result</h2>
+
 <div id="output"></div>
+
+</div>
 
 <script>
 
 function createTable(){
 
 let n=document.getElementById("points").value
-let table="<table border='1'><tr><th>x</th><th>y</th></tr>"
+
+let table="<table><tr><th>x</th><th>y</th></tr>"
 
 for(let i=0;i<n;i++){
 
@@ -99,7 +170,7 @@ result+= (pterm*diff[n-1][i])/fact
 }
 
 document.getElementById("output").innerHTML=
-"Interpolated Value = "+result
+"<b>Interpolated Value = </b>"+result.toFixed(5)
 
 }
 
