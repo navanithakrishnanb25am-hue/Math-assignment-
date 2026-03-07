@@ -70,3 +70,66 @@ color:#1f4037;
 font-size:14px;
 
 }
+body{
+
+font-family: Arial, sans-serif;
+margin:0;
+padding:0;
+text-align:center;
+color:white;
+
+background: linear-gradient(-45deg,#1f4037,#99f2c8,#2c5364,#0f2027);
+background-size:400% 400%;
+
+animation:gradientMove 10s ease infinite;
+
+}
+
+@keyframes gradientMove{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+h1{
+
+margin-top:80px;
+font-size:42px;
+
+}
+
+.menu{
+
+margin-top:40px;
+
+}
+
+button{
+
+width:280px;
+padding:15px;
+margin:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+
+background:white;
+color:#1f4037;
+
+box-shadow:0 8px 15px rgba(0,0,0,0.3);
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-5px);
+background:#1f4037;
+color:white;
+
+}
+
